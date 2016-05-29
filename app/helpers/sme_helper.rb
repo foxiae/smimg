@@ -1,0 +1,2 @@
+module SmeHelper
+end

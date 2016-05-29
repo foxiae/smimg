@@ -1,0 +1,10 @@
+<%= form_for @image, :html => {:multipart => true} do |f| %>
+  <p>
+    <%= f.file_field :image %>
+  </p>
+  <p>
+    <%= f.label :remote_emojii_url, "or image URL" %><br />
+    <%= f.text_field :remote_emojii_url %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
