@@ -1,7 +1,6 @@
-class SmeController < ApplicationController
+class ImageController < ApplicationController
   def index
-    @image = Image.all
-    @image.emojii
+    create
   end
 
   def new
@@ -11,15 +10,15 @@ class SmeController < ApplicationController
   def create
     @image = Image.new
     if @image.save
+      render :action => 'show'
       flash[:notice] = "Look at your resized gif!"
-      redirect_to image_path(@image)
     else
       flash[:notice] = "Sorry, nothing happened"
     end
   end
 
   def show
-    @image = Image.all
+    @image = Image.find(params[:id])
   end
 
   def edit
@@ -28,12 +27,15 @@ class SmeController < ApplicationController
 
   def update
     @image = Image.find(params[:id])
-    if @image.update_attributes
+    if @image.update(image_param)
       flash[:notice] = "Successfully updated painting."
-      redirect_to sme_path
+      render :action => 'show'
     else
       render :action => 'edit'
     end
   end
 
+  def image_param
+    params.require(:image).permit(:emojii)
+  end
 end
