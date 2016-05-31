@@ -35,6 +35,12 @@ class ImageController < ApplicationController
     end
   end
 
+  def download_image
+    @image = Image.find(params[:id])
+    #for emojii resize
+    send_file(@image.emojii.emojii.path, type: 'image')
+  end
+
   def image_param
     params.require(:image).permit(:emojii)
   end

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'image#index'
 
   resources :image
+  post 'image/:id/download_image(.:format)', :controller => 'image', :action => 'download_image', as: 'download_image'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
