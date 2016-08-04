@@ -10,7 +10,6 @@ class ImageController < ApplicationController
   def create
     @image = Image.new
     if @image.save
-      render :action => 'show'
       flash[:notice] = "Look at your resized gif!"
     else
       flash[:notice] = "Sorry, nothing happened"
@@ -30,12 +29,11 @@ class ImageController < ApplicationController
     if @image.update(image_param)
       flash[:notice] = "Successfully updated painting."
       render :action => 'show'
-    else
-      render :action => 'edit'
     end
   end
 
+  private
   def image_param
-    params.require(:image).permit(:emojii)
+    params.require(:image).permit(:emojii, :remote_emojii_url)
   end
 end
